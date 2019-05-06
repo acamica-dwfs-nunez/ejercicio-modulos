@@ -42,11 +42,29 @@ class ABM {
     return resultado
   }
 
-  borrarAlumno(id) {
-    // borrar alumno
-  }
+  borrarAlumno(busqueda) {
+    const  resultado = Object.keys(this.alumnos)
+      .map(id => this.alumnos[id])
+      .filter(alumno => {
+        for (const prop in alumno) {
+          if (alumno.hasOwnProperty(prop)) {
+            const atributo = alumno[prop]
+            let bool = atributo == busqueda || atributo.toString().includes(busqueda)
+            return bool
+          } 
+        }
+      })
+      delete this.alumnos[resultado[0].id]
+      // console.log(this.alumnos)      
+    }
+    
 
   //crear metodo para editar alumno
+  editar(par, campo){
+    par = campo
+    console.log(par);
+  }    
 }
+
 
 module.exports = { Alumno, ABM }
